@@ -200,7 +200,7 @@
               <button @click="goToPage(2)" v-show="(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-blue-500 hover:bg-blue-600">See Urgent Priority DR Questions</button>
 
               <!-- if one or both no, go to Non-Reportable Page -->
-              <button @click="goToPage(6)" v-show="this.questionSet[0].done && !(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-blue-500 hover:bg-blue-600">See Non-Reportable Issue</button>
+              <button @click="goToPage(6)" v-show="this.questionSet[0].done && !(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Non-Reportable Issue</button>
             </div>
             
           </div>
@@ -232,7 +232,7 @@
               <button @click="goToPage(7)" v-show="(this.questionSet[1].q1 && this.questionSet[1].q2)" class="btn bg-blue-500 hover:bg-blue-600">Urgent Priority DR Required</button>
 
               <!-- if one or both no, go to High Priority DR Questions -->
-              <button @click="goToPage(3)" v-show="this.questionSet[1].done && !(this.questionSet[1].q1 && this.questionSet[1].q2)" class="btn bg-blue-500 hover:bg-blue-600">See High Priority Questions</button>
+              <button @click="goToPage(3)" v-show="this.questionSet[1].done && !(this.questionSet[1].q1 && this.questionSet[1].q2)" class="btn bg-orange-500 hover:bg-orange-600">See High Priority Questions</button>
             </div>
 
           </div>
@@ -263,7 +263,7 @@
               <button @click="goToPage(8)" v-show="(this.questionSet[2].q1 && this.questionSet[2].q2)" class="btn bg-blue-500 hover:bg-blue-600">High Priority DR Required</button>
 
               <!-- if one or both no, go to Normal Priority DR Questions -->
-              <button @click="goToPage(4)" v-show="this.questionSet[2].done && !(this.questionSet[2].q1 && this.questionSet[2].q2)" class="btn bg-blue-500 hover:bg-blue-600">See Normal Priority Questions</button>
+              <button @click="goToPage(4)" v-show="this.questionSet[2].done && !(this.questionSet[2].q1 && this.questionSet[2].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Normal Priority Questions</button>
             </div>
 
           </div>
@@ -287,7 +287,7 @@
               <button @click="goToPage(9)" v-show="this.questionSet[3].q1" class="btn bg-blue-500 hover:bg-blue-600">Normal Priority DR Required</button>
 
               <!-- if one or both no, go to Low Priority DR Questions -->
-              <button @click="goToPage(5)" v-show="this.questionSet[3].done && !this.questionSet[3].q1" class="btn bg-blue-500 hover:bg-blue-600">See Low Priority Questions</button>
+              <button @click="goToPage(5)" v-show="this.questionSet[3].done && !this.questionSet[3].q1" class="btn bg-orange-500 hover:bg-orange-600">See Low Priority Questions</button>
             </div>
 
           </div>
@@ -318,7 +318,7 @@
               <button @click="goToPage(10)" v-show="(this.questionSet[4].q1 && this.questionSet[4].q2)" class="btn bg-blue-500 hover:bg-blue-600">Low Priority DR Required</button>
 
               <!-- if one or both no, go to Non-Reportable Issue -->
-              <button @click="goToPage(6)" v-show="this.questionSet[4].done && !(this.questionSet[4].q1 && this.questionSet[4].q2)" class="btn bg-blue-500 hover:bg-blue-600">Non-Reportable Issue</button>
+              <button @click="goToPage(6)" v-show="this.questionSet[4].done && !(this.questionSet[4].q1 && this.questionSet[4].q2)" class="btn bg-orange-500 hover:bg-orange-600">Non-Reportable Issue</button>
             </div>
 
           </div>
@@ -331,7 +331,7 @@
 
             <div class="w-full text-base p-4 ring-1 ring-slate-600 rounded bg-gray-700 shadow-2xl shadow-slate-950">
               <div class="bg-blue-600 h-5 md:w-1/2 w-full"></div>
-              <h2 class="text-2xl md:text-3xl md:text-3xl font-bold my-5">Non-Reportable Issue</h2>
+              <h2 class="text-2xl md:text-3xl font-bold my-5">Non-Reportable Issue</h2>
               <p class="text-gray-300">A non-reportable issue is anything that does not have the ability to be reproduced, does not have clear instructions to recreate, or is a surface level cosmetic adjustment. For example, a grammatical error in a mission or a request to change the language that is currently published.</p>
               <div class="p-5 bg-gray-500 mt-5">
                 <h3 class="text-xl font-bold">Possible next steps to make the issue reportable:</h3>
