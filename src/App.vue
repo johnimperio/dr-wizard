@@ -2,18 +2,20 @@
   import CustomForm from './components/CustomForm.vue'
 
   export default {
+
     components: {
       CustomForm
     },
+
     data() {
       return { 
 
-        wizardStarted: false,
-        showBack: false,
-        nextQuestion: false,
-        summary: '',
+        wizardStarted: false,        
+        showBack: false,        
+        nextQuestion: false,       
         currentPage: 1,
 
+        // store input radio button states on this object
         questionSet: [
           { q1: false, q2: false, done: false, r1: null, r2: null },
           { q1: false, q2: false, done: false, r1: null, r2: null },
@@ -22,6 +24,7 @@
           { q1: false, q2: false, done: false, r1: null, r2: null }
         ],
      
+        // for hiding/showing pages
         wizard: [
           { pageId: 1, showPage: false }, // start
           { PageId: 2, showPage: false }, // urgent dr questions
@@ -36,6 +39,7 @@
         ]
       }
     },
+
     methods: {
 
       startWizard() {
@@ -45,10 +49,12 @@
 
       restartWizard() {        
 
+        // reset all wizard pages
         for (let x = 0; x < this.wizard.length; x++) {
           this.wizard[x].showPage = false            
         }
 
+        // reset all input radio buttons values
         for (let x2 = 0; x2 < this.questionSet.length; x2++) {
           this.questionSet[x2].q1 = false
           this.questionSet[x2].q2 = false
@@ -61,10 +67,10 @@
         this.nextQuestion = false;
         this.showBack = false;
         this.currentPage = 1;
-
-        this.summary = '';
+        
       },
 
+      // evaluate input radio button answers and define next questions state
       updateWizard(questionNum, questionValue) {
         switch (questionNum) {
           case 'p1q1': 
@@ -77,17 +83,27 @@
             this.questionSet[0].done = true;            
             break;
           
-          case 'p2q1': 
+          case 'p2q1-yes': 
             this.questionSet[1].q1 = questionValue; 
-            this.nextQuestion = true; 
+            this.nextQuestion = false;
             break;
+
+          case 'p2q1-no': 
+            this.questionSet[1].q1 = questionValue; 
+            this.nextQuestion = true;
+          break;          
 
           case 'p2q2': 
             this.questionSet[1].q2 = questionValue; 
             this.questionSet[1].done = true; 
             break;
 
-          case 'p3q1': 
+          case 'p3q1-yes': 
+            this.questionSet[2].q1 = questionValue; 
+            this.nextQuestion = false; 
+            break;
+
+          case 'p3q1-no': 
             this.questionSet[2].q1 = questionValue; 
             this.nextQuestion = true; 
             break;
@@ -115,38 +131,36 @@
         }
       },
 
+      // hide/show page
       goToPage(pageNumber) {  
 
-        switch (pageNumber) {
-          case 1 : this.showBack = false; this.currentPage = 1; break;
-          case 2 : this.showBack = true; this.currentPage = 2; break;
-          case 3 : this.showBack = true; this.currentPage = 3; break;
-          case 4 : this.showBack = true; this.currentPage = 4; break;
-          case 5 : this.showBack = true; this.currentPage = 5; break;
-          case 6 : this.showBack = false; this.currentPage = 6; break;
-          case 7 : this.showBack = false; this.currentPage = 7; break;
-          case 8 : this.showBack = false; this.currentPage = 8; break;
-          case 9 : this.showBack = false; this.currentPage = 9; break;
-          case 10 : this.showBack = false; this.currentPage = 10; break;
-          default: this.showBack = false;          
-        }        
+        if ((pageNumber > 1) && (pageNumber < 6)) {
+          this.showBack = true
+        } else {
+          this.showBack = false
+        } 
         
         for (let x = 0; x < this.wizard.length; x++) {
           this.wizard[x].showPage = false
         }
-        this.wizard[pageNumber-1].showPage = true        
+
+        this.wizard[pageNumber-1].showPage = true
+        this.currentPage = pageNumber        
         this.nextQuestion = false
         
       },
 
       goPreviousPage() {
 
-        this.currentPage -= 1;        
+        this.currentPage -= 1
 
         for (let x = 0; x < this.wizard.length; x++) {
           this.wizard[x].showPage = false
         }
+
         this.wizard[this.currentPage-1].showPage = true        
+        this.questionSet[this.currentPage-1].r1 = null
+        this.questionSet[this.currentPage-1].r2 = null
         this.questionSet[this.currentPage-1].done = false        
         this.nextQuestion = false        
 
@@ -159,20 +173,38 @@
 
 <template>  
   
-  <div class="h-full md:h-screen font-sans text-xl bg-gray-800 p-4 md:p-8 relative text-white font-light">
+  <div class="h-screen md:h-screen font-sans text-xl bg-gray-800 p-4 md:p-8 relative text-white font-light">
 
     <div class="pb-4 mb-10 border border-gray-500 border-t-0 border-separate border-l-0 border-r-0 border-b">
-      <h1 class="text-xl sm:text-3xl md:text-4xl md:mt-0 font-bold md:max-w-none w-1/2 sm:w-full md:w-full">DR Issuance Workflow</h1>
-      <p v-show="!wizardStarted" class="text-gray-400 text-base">This wizard will ask you a series of Yes or No questions.</p>
+      <h1 class="text-xl sm:text-3xl md:text-4xl md:mt-0 font-bold md:max-w-none w-1/2 sm:w-full md:w-full">DR Issuance Workflow</h1>      
     </div>          
     
     <div class="flex justify-between">
-      <div class="w-screen">          
+      <div class="w-screen">
 
-        <button v-show="!wizardStarted" v-on:click="startWizard()" class="mt-0 md:mt-4 px-4 py-1 md:px-5 md:py-3 md:text-xl text-lg rounded-full text-white bg-blue-500 hover:bg-blue-600">Start Wizard</button>
+        <Transition name="slide-fade">
+          <div v-show="!wizardStarted" class="flex justify-center gap-6 flex-wrap md:flex-nowrap">
+                
+            <a v-on:click="startWizard()" class="flex items-center cursor-pointer justify-center h-52 md:h-60 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-700 w-60">
+              <div>                
+                <h5 class="mb-4 text-3xl font-bold tracking-tight text-white-200 underline">Start Wizard</h5>
+                <p class="text-sm font-light leading-tight text-slate-300">Click here if the behavior or feature of the system is not working as expected</p>
+              </div>
+            </a>
+          
+            <a target="_blank" href="https://forms.monday.com/forms/bcb5036610a533c452bb769c487a1c57?r=use1" class="flex items-center justify-center h-52 md:h-60 max-w-sm p-6 md:p-6 text-center bg-orange-500 ring-1 ring-orange-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-orange-600 w-60">
+              <div>                
+                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Have a feature or idea request?</h5>
+                <p class="text-sm font-light leading-tight text-slate-200">Click here if the issue is a feature improvement, cosmetic enhancement, grammatical error or copy adjustment</p>
+              </div>
+            </a>
+            
+          </div>        
+        </Transition>
+        
         <button v-show="wizardStarted" v-on:click="restartWizard()" class="absolute top-4 right-4 md:top-6 md:right-7 px-3 py-1 md:px-5 md:py-3 rounded-full text-base text-white border bg-gray-0 hover:bg-gray-700">Start Over</button>
         <button v-show="showBack" v-on:click="goPreviousPage()" class="absolute top-4 right-32 md:top-6 md:right-40 px-3 py-1 md:px-5 md:py-3 rounded-full text-base text-white border bg-gray-0 hover:bg-gray-700">Back</button>
-        <p class="absolute bottom-7 right-7 text-base font-light text-gray-400" v-show="(this.currentPage < 6)">Page {{ currentPage }}</p>
+        <p class="absolute bottom-7 right-7 text-base font-light text-gray-400" v-show="(this.currentPage < 6) && (this.wizardStarted)">Page {{ currentPage }}</p>
         
         <!-- Page 1 - START TRIAGE/EVAL QUESTIONS -->
         <Transition name="slide-fade">
@@ -180,7 +212,7 @@
             
             <h2 class="md:text-3xl my-5 font-medium">Triage/Evaluations Questions</h2>
 
-            <ol>
+            <ol class="ml-8 list-decimal">
               <li>
                 <p>Have you recreated this issue?</p>                  
                 <input type="radio" name="p1q1" v-model="this.questionSet[0].r1" @click="updateWizard('p1q1', true)" value="Yes"><label for="p1q1"> Yes</label>
@@ -197,7 +229,7 @@
 
             <div class="mt-10">
               <!-- if both yes, go to Urgent DR Questions -->
-              <button @click="goToPage(2)" v-show="(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-blue-500 hover:bg-blue-600">See Urgent Priority DR Questions</button>
+              <button @click="goToPage(2)" v-show="(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-blue-500 hover:bg-blue-600">Next</button>
 
               <!-- if one or both no, go to Non-Reportable Page -->
               <button @click="goToPage(6)" v-show="this.questionSet[0].done && !(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Non-Reportable Issue</button>
@@ -212,11 +244,11 @@
           <div v-show="this.wizard[1].showPage">
             <h2 class="md:text-3xl my-5 font-medium">Urgent Priority DR Questions</h2>
 
-            <ol>
+            <ol class="ml-8 list-decimal">
               <li>
                 <p>Is the event live and causing major disruption?</p>
-                <input type="radio" name="p2q1" v-model="this.questionSet[1].r1" @click="updateWizard('p2q1', true)" value="Yes"><label for="p2q1"> Yes</label>
-                <input type="radio" name="p2q1" v-model="this.questionSet[1].r1" @click="updateWizard('p2q1', false)" value="No"><label for="p2q1"> No</label>
+                <input type="radio" name="p2q1" v-model="this.questionSet[1].r1" @click="updateWizard('p2q1-yes', true)" value="Yes"><label for="p2q1"> Yes</label>
+                <input type="radio" name="p2q1" v-model="this.questionSet[1].r1" @click="updateWizard('p2q1-no', false)" value="No"><label for="p2q1"> No</label>
               </li>
               <Transition name="slide-fade">
               <li v-show="nextQuestion">
@@ -229,10 +261,10 @@
 
             <div class="mt-10">
               <!-- if both yes, submit Urgent DR -->
-              <button @click="goToPage(7)" v-show="(this.questionSet[1].q1 && this.questionSet[1].q2)" class="btn bg-blue-500 hover:bg-blue-600">Urgent Priority DR Required</button>
-
+              <button @click="goToPage(7)" v-show="(this.questionSet[1].q1) || ((!this.questionSet[1].q1 && this.questionSet[1].q2))" class="btn bg-blue-500 hover:bg-blue-600">Urgent Priority DR Required</button>
+              
               <!-- if one or both no, go to High Priority DR Questions -->
-              <button @click="goToPage(3)" v-show="this.questionSet[1].done && !(this.questionSet[1].q1 && this.questionSet[1].q2)" class="btn bg-orange-500 hover:bg-orange-600">See High Priority Questions</button>
+              <button @click="goToPage(3)" v-show="this.questionSet[1].done && (!this.questionSet[1].q1 && !this.questionSet[1].q2)" class="btn bg-orange-500 hover:bg-orange-600">Next</button>
             </div>
 
           </div>
@@ -243,11 +275,11 @@
           <div v-show="this.wizard[2].showPage">
             <h2 class="md:text-3xl my-5 font-medium">High Priority DR Questions</h2>
 
-            <ol>
+            <ol class="ml-8 list-decimal">
               <li>
                 <p>Is the issue impacting a customer’s product that has launched, is launching, or closing within the next 2 days? </p>
-                <input type="radio" name="p3q1" v-model="this.questionSet[2].r1" @click="updateWizard('p3q1', true)" value="Yes"><label for="p3q1"> Yes</label>
-                <input type="radio" name="p3q1" v-model="this.questionSet[2].r1" @click="updateWizard('p3q1', false)" value="No"><label for="p3q1"> No</label>
+                <input type="radio" name="p3q1" v-model="this.questionSet[2].r1" @click="updateWizard('p3q1-yes', true)" value="Yes"><label for="p3q1"> Yes</label>
+                <input type="radio" name="p3q1" v-model="this.questionSet[2].r1" @click="updateWizard('p3q1-no', false)" value="No"><label for="p3q1"> No</label>
               </li>
               <Transition name="slide-fade">
               <li v-show="nextQuestion">
@@ -260,10 +292,10 @@
 
             <div class="mt-10">
               <!-- if both yes, submit High Priority DR -->
-              <button @click="goToPage(8)" v-show="(this.questionSet[2].q1 && this.questionSet[2].q2)" class="btn bg-blue-500 hover:bg-blue-600">High Priority DR Required</button>
+              <button @click="goToPage(8)" v-show="(this.questionSet[2].q1) || ((!this.questionSet[2].q1 && this.questionSet[2].q2))" class="btn bg-blue-500 hover:bg-blue-600">High Priority DR Required</button>
 
               <!-- if one or both no, go to Normal Priority DR Questions -->
-              <button @click="goToPage(4)" v-show="this.questionSet[2].done && !(this.questionSet[2].q1 && this.questionSet[2].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Normal Priority Questions</button>
+              <button @click="goToPage(4)" v-show="this.questionSet[2].done && (!this.questionSet[2].q1 && !this.questionSet[2].q2)" class="btn bg-orange-500 hover:bg-orange-600">Next</button>
             </div>
 
           </div>
@@ -272,9 +304,9 @@
         <!-- Page 4 - NORMAL PRIORITY DR QUESTIONS -->
         <Transition name="slide-fade">
           <div v-show="this.wizard[3].showPage">
-            <h2 class="md:text-3xl my-5 font-medium">Normal Priority DR Questions</h2>
+            <h2 class="md:text-3xl my-5 font-medium">Low/Normal Priority DR Question</h2>
 
-            <ol>
+            <ol class="ml-8 list-decimal">
               <li>
                 <p>Is a front-end or admin feature down for more than one customer but there is a workaround?</p>
                 <input type="radio" name="p4q1" v-model="this.questionSet[3].r1" @click="updateWizard('p4q1', true)" value="Yes"><label for="p4q1"> Yes</label>
@@ -284,21 +316,21 @@
 
             <div class="mt-10">
               <!-- if both yes, submit Normal Priority DR -->
-              <button @click="goToPage(9)" v-show="this.questionSet[3].q1" class="btn bg-blue-500 hover:bg-blue-600">Normal Priority DR Required</button>
+              <button @click="goToPage(10)" v-show="this.questionSet[3].q1" class="btn bg-blue-500 hover:bg-blue-600">Low Priority DR Required</button>
 
               <!-- if one or both no, go to Low Priority DR Questions -->
-              <button @click="goToPage(5)" v-show="this.questionSet[3].done && !this.questionSet[3].q1" class="btn bg-orange-500 hover:bg-orange-600">See Low Priority Questions</button>
+              <button @click="goToPage(9)" v-show="this.questionSet[3].done && !this.questionSet[3].q1" class="btn bg-orange-500 hover:bg-orange-600">Normal Priority DR Required</button>
             </div>
 
           </div>
         </Transition>
         
         <!-- Page 5 - LOW PRIORITY DR QUESTIONS -->
-        <Transition name="slide-fade">
+        <!-- <Transition name="slide-fade">
           <div v-show="this.wizard[4].showPage">
             <h2 class="md:text-3xl my-5 font-medium">Low Priority DR Questions</h2>
 
-            <ol>
+            <ol class="ml-8 list-decimal">
               <li>
                 <p>Is a feature down for one customer or one front-end user?</p>
                 <input type="radio" name="p5q1" v-model="this.questionSet[4].r1" @click="updateWizard('p5q1', true)" value="Yes"><label for="p5q1"> Yes</label>
@@ -314,15 +346,15 @@
             </ol>
 
             <div class="mt-10">
-              <!-- if both yes, submit Low Priority DR -->
+              
               <button @click="goToPage(10)" v-show="(this.questionSet[4].q1 && this.questionSet[4].q2)" class="btn bg-blue-500 hover:bg-blue-600">Low Priority DR Required</button>
 
-              <!-- if one or both no, go to Non-Reportable Issue -->
+              
               <button @click="goToPage(6)" v-show="this.questionSet[4].done && !(this.questionSet[4].q1 && this.questionSet[4].q2)" class="btn bg-orange-500 hover:bg-orange-600">Non-Reportable Issue</button>
             </div>
 
           </div>
-        </Transition>
+        </Transition> -->
 
         <!-- ********************************************************************* -->
         <!-- Page 6 - NON REPORTABLE ISSUE -->
@@ -332,10 +364,10 @@
             <div class="w-full text-base p-4 ring-1 ring-slate-600 rounded bg-gray-700 shadow-2xl shadow-slate-950">
               <div class="bg-blue-600 h-5 md:w-1/2 w-full"></div>
               <h2 class="text-2xl md:text-3xl font-bold my-5">Non-Reportable Issue</h2>
-              <p class="text-gray-300">A non-reportable issue is anything that does not have the ability to be reproduced, does not have clear instructions to recreate, or is a surface level cosmetic adjustment. For example, a grammatical error in a mission or a request to change the language that is currently published.</p>
+              <p class="text-gray-300">A non-reportable issue is anything that does not have the ability to be reproduced or does not have clear instructions to recreate.</p>
               <div class="p-5 bg-gray-500 mt-5">
                 <h3 class="text-xl font-bold">Possible next steps to make the issue reportable:</h3>
-                <ul>
+                <ul class="list-disc mx-5 mb-8">
                   <li>Get further clarification from the client</li>
                   <li>Work with your team to further research the issue</li>
                   <li>Provide clear steps for reproduction</li>
@@ -356,7 +388,7 @@
                 <div class="bg-red-500 h-5 w-full"></div>
                 <h2 class="text-2xl md:text-3xl my-5 font-bold">Submit an Urgent Priority DR</h2>
                 <h3 class="text-xl font-semibold mt-5 mb-3">Timeline</h3>
-                <p>If an issue is truly urgent, a development manager will be notified and the issue will be pulled into an active sprint. The submitter will be notified of any updates along the way as well as immediate confirmation that the request has been seen.</p>
+                <p>If the issue is truly urgent, a developer will be assigned to work on the ticket immediately. The submitter will be notified of any updates along the way as well as immediate confirmation that the request has been seen.</p>
                 <div class="p-5 bg-gray-500 mt-5">
                   <h3 class="text-xl font-semibold mb-4">Suggested Client Messaging</h3>
                   <p>We recognize that this issue is causing major disruption to your event and products. The team is working to find a solution or workaround for the problem that you have reported. We will provide an update as soon as we have any additional information.</p>
@@ -448,12 +480,9 @@
 </template>
 
 <style scoped>
-
-  ol { list-style: numerals; margin-left: 30px; }
+  
   ol li { margin-top: 15px; }
   ol li label { margin-right: 20px; }
-
-  ul { list-style: disc; margin: 20px 0 20px 30px; }
   
   input[type="radio"] {
     width: 22px;
@@ -463,12 +492,6 @@
     margin-right: 4px;    
   }  
 
-  input[type="text"] {
-    width: 100%;
-    padding: 3px 10px;
-    font-size: 1rem;
-  }
-
   .btn {
     border-radius: 50px;
     padding: 4px 16px;    
@@ -476,8 +499,6 @@
     color: #fff;
     font-size: 1rem;
   }
-
-  hr { margin: 8px 0 12px 0; }
 
   .slide-fade-enter-active {
     transition: all 0.3s ease-out;
