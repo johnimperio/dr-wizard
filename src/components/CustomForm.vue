@@ -91,6 +91,10 @@
     color: #000;
   }
 
+  textarea {
+    color: #000;    
+  }
+
   .slide-fade-enter-active {
     transition: all 0.3s ease-out;
   }
