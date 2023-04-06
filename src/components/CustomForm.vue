@@ -96,11 +96,19 @@
   }
 
   .slide-fade-enter-active {
-    transition: all 0.3s ease-out;
+    transition: all 0.3s 0.3s ease-out;
   }
 
+  .slide-fade-leave-active {
+    transition: all 0.3s 0.3s ease-out;
+  }
+  .slide-fade-leave-to {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
   .slide-fade-enter-from {
     transform: translateX(-20px);
     opacity: 0;
   }
+
 </style>

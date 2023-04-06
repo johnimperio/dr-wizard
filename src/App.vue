@@ -156,13 +156,23 @@
 
         for (let x = 0; x < this.wizard.length; x++) {
           this.wizard[x].showPage = false
-        }
+        }        
 
-        this.wizard[this.currentPage-1].showPage = true        
+        // clear input radio button values for current page
+        this.questionSet[this.currentPage].q1 = null
+        this.questionSet[this.currentPage].q2 = null
+        this.questionSet[this.currentPage].r1 = null
+        this.questionSet[this.currentPage].r2 = null
+        this.questionSet[this.currentPage].done = false
+                
+        // clear input radio button values for previous page
+        this.wizard[this.currentPage-1].showPage = true
+        this.questionSet[this.currentPage-1].q1 = null
+        this.questionSet[this.currentPage-1].q2 = null
         this.questionSet[this.currentPage-1].r1 = null
         this.questionSet[this.currentPage-1].r2 = null
         this.questionSet[this.currentPage-1].done = false        
-        this.nextQuestion = false        
+        this.nextQuestion = false
 
       }
 
@@ -501,11 +511,18 @@
   }
 
   .slide-fade-enter-active {
-    transition: all 0.3s ease-out;
+    transition: all 0.3s 0.3s ease-out;
   }
 
+  .slide-fade-leave-active {
+    transition: all 0.3s ease-out;
+  }
+  .slide-fade-leave-to {
+    transform: translateY(30px);
+    opacity: 0;
+  }
   .slide-fade-enter-from {
-    transform: translateX(-20px);
+    transform: translateY(30px);
     opacity: 0;
   }
 
