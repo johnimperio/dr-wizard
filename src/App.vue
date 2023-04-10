@@ -195,14 +195,14 @@
         <Transition name="slide-fade">
           <div v-show="!wizardStarted" class="flex justify-center gap-6 flex-wrap md:flex-nowrap">
                 
-            <a v-on:click="startWizard()" class="flex items-center cursor-pointer justify-center h-52 md:h-60 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-700 w-60">
+            <a v-on:click="startWizard()" class="flex items-start cursor-pointer justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-700 w-60">
               <div>                
-                <h5 class="mb-4 text-3xl font-bold tracking-tight text-white-200 underline">Start Wizard</h5>
+                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 underline">Experiencing an issue?</h5>
                 <p class="text-sm font-light leading-tight text-slate-300">Click here if the behavior or feature of the system is not working as expected</p>
               </div>
             </a>
           
-            <a target="_blank" href="https://forms.monday.com/forms/bcb5036610a533c452bb769c487a1c57?r=use1" class="flex items-center justify-center h-52 md:h-60 max-w-sm p-6 md:p-6 text-center bg-orange-500 ring-1 ring-orange-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-orange-600 w-60">
+            <a target="_blank" href="https://forms.monday.com/forms/bcb5036610a533c452bb769c487a1c57?r=use1" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-orange-500 ring-1 ring-orange-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-orange-600 w-60">
               <div>                
                 <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Have a feature or idea request?</h5>
                 <p class="text-sm font-light leading-tight text-slate-200">Click here if the issue is a feature improvement, cosmetic enhancement, grammatical error or copy adjustment</p>
@@ -242,7 +242,7 @@
               <button @click="goToPage(2)" v-show="(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-blue-500 hover:bg-blue-600">Next</button>
 
               <!-- if one or both no, go to Non-Reportable Page -->
-              <button @click="goToPage(6)" v-show="this.questionSet[0].done && !(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Non-Reportable Issue</button>
+              <button @click="goToPage(6)" v-show="this.questionSet[0].done && !(this.questionSet[0].q1 && this.questionSet[0].q2)" class="btn bg-orange-500 hover:bg-orange-600">See Non-Essential Issue</button>
             </div>
             
           </div>
@@ -373,8 +373,8 @@
 
             <div class="w-full text-base p-4 ring-1 ring-slate-600 rounded bg-gray-700 shadow-2xl shadow-slate-950">
               <div class="bg-blue-600 h-5 md:w-1/2 w-full"></div>
-              <h2 class="text-2xl md:text-3xl font-bold my-5">Non-Reportable Issue</h2>
-              <p class="text-gray-300">A non-reportable issue is anything that does not have the ability to be reproduced or does not have clear instructions to recreate.</p>
+              <h2 class="text-2xl md:text-3xl font-bold my-5">Non-Essential Issue</h2>
+              <p class="text-gray-300 selection:bg-orange-500 selection:text-white">A non-essential issue is anything that does not have the ability to be reproduced or does not have clear instructions to recreate.</p>
               <div class="p-5 bg-gray-500 mt-5">
                 <h3 class="text-xl font-bold">Possible next steps to make the issue reportable:</h3>
                 <ul class="list-disc mx-5 mb-8">
