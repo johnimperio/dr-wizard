@@ -404,7 +404,7 @@
                   <p>We recognize that this issue is causing major disruption to your event and products. The team is working to find a solution or workaround for the problem that you have reported. We will provide an update as soon as we have any additional information.</p>
                 </div>
               </div>
-              <CustomForm />
+              <CustomForm priority="urgent"></CustomForm>
             </div>
 
           </div>
@@ -429,7 +429,7 @@
                   <p>Thank you for reporting this issue. We are investigating the problem further and will get back to you with a status update when we have more information.</p>
                 </div>     
               </div>              
-              <CustomForm />
+              <CustomForm priority="high"></CustomForm>
             </div>
 
           </div>
@@ -454,7 +454,7 @@
                   <p>Thank you for reporting this issue. We have added it to our issue queue and will consider it for future development.</p>
                 </div>
               </div>
-              <CustomForm />
+              <CustomForm priority="normal"></CustomForm>
             </div>           
 
           </div>
@@ -475,7 +475,7 @@
                   <p>Thank you for reporting this issue. We have added it to our issue queue and will consider it for future development.</p>                
                 </div>             
               </div>
-              <CustomForm />
+              <CustomForm priority="low"></CustomForm>
             </div>
 
           </div>

@@ -1,5 +1,8 @@
 <script>
   export default {
+
+    props: ['priority'],
+
     data() {
       return {
 
@@ -18,6 +21,7 @@
     methods: {
 
       submitFormDetails() {
+
         // store all form details in this variable
         this.fullSummary = `1. Expected behavior\n` + this.expectedBehavior + `\n\n` +
           `2. Actual behavior\n` + this.actualBehavior + `\n\n` +
@@ -27,7 +31,7 @@
           `6. Login details\n` + this.loginDetails + `\n\n` +
           `7. URL details\n` + this.urlDetails + `\n\n`
 
-        alert(this.fullSummary)
+        alert('Priority: ' + this.priority + `\n` + this.fullSummary)        
       }
 
     }
