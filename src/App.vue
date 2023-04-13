@@ -186,19 +186,33 @@
   <div class="h-screen md:h-screen font-sans text-xl bg-gray-800 p-4 md:p-8 relative text-white font-light">
 
     <div class="pb-4 mb-10 border border-gray-500 border-t-0 border-separate border-l-0 border-r-0 border-b">
-      <h1 class="text-xl sm:text-3xl md:text-4xl md:mt-0 font-bold md:max-w-none w-1/2 sm:w-full md:w-full">DR Issuance Workflow</h1>      
+      <h1 class="text-xl sm:text-3xl md:text-4xl md:mt-0 font-bold md:max-w-none w-1/2 sm:w-full md:w-full">Add a Ticket</h1>      
     </div>          
     
     <div class="flex justify-between">
       <div class="w-screen">
 
         <Transition name="slide-fade">
-          <div v-show="!wizardStarted" class="flex justify-center gap-6 flex-wrap md:flex-nowrap">
+          <div v-show="!wizardStarted" class="flex justify-center gap-6 flex-wrap lg:flex-nowrap">
                 
             <a v-on:click="startWizard()" class="flex items-start cursor-pointer justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-700 w-60">
               <div>                
                 <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 underline">Experiencing an issue?</h5>
                 <p class="text-sm font-light leading-tight text-slate-300">Click here if the behavior or feature of the system is not working as expected</p>
+              </div>
+            </a>
+
+            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-teal-600 ring-1 ring-teal-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-teal-700 w-60">
+              <div>                
+                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Need help with integrations?</h5>
+                <p class="text-sm font-light leading-tight text-slate-200">Click here if you need assistance with product integrations</p>
+              </div>
+            </a>
+
+            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-indigo-500 ring-1 ring-indigo-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-indigo-700 w-60">
+              <div>                
+                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Looking for a report?</h5>
+                <p class="text-sm font-light leading-tight text-slate-200">Click here if you require assistance generating custom analytics data</p>
               </div>
             </a>
           
