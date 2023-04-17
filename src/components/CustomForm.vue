@@ -107,7 +107,7 @@
       </label>
      
       <label for="drProductID">Product associated with <span class="text-yellow-200">*</span>
-      <select id="drProductID" name="drProductID" v-model="product" class="bg-gray-900 border border-gray-600 text-white placeholder:text-white text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1">
+      <select id="drProductID" name="drProductID" v-model="product" class="bg-gray-900 border border-gray-600 text-white placeholder:text-white text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1 appearance-none">
         <option value="-1" selected>Select the associated product below</option>
         <option value="0">myCadmium</option>
         <option value="1">Abstract Scorecard</option>
