@@ -243,31 +243,31 @@
         <Transition name="slide-fade">
           <div v-show="!wizardStarted" class="flex justify-center gap-6 flex-wrap lg:flex-nowrap">
                 
-            <a v-on:click="startWizard()" class="flex items-start cursor-pointer justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-700 w-60">
+            <a v-on:click="startWizard()" class="flex items-start cursor-pointer justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-blue-600 ring-1 ring-blue-700 rounded-lg shadow-zinc-950 shadow-lg hover:bg-blue-800 w-60 text-white">
               <div>                
-                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 underline">Experiencing an issue?</h5>
-                <p class="text-sm font-light leading-tight text-slate-300">Click here if the behavior or feature of the system is not working as expected</p>
+                <h5 class="mb-4 text-xl font-bold tracking-tight underline">Experiencing an issue?</h5>
+                <p class="text-sm font-light leading-tight">Click here if the behavior or feature of the system is not working as expected</p>
               </div>
             </a>
 
-            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-teal-600 ring-1 ring-teal-500 rounded-lg shadow-zinc-950 shadow-lg hover:bg-teal-700 w-60">
+            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-teal-600 ring-1 ring-teal-700 rounded-lg shadow-zinc-950 shadow-lg hover:bg-teal-800 w-60 text-white">
               <div>                
-                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Need help with integrations?</h5>
-                <p class="text-sm font-light leading-tight text-slate-200">Click here if you need assistance with product integrations</p>
+                <h5 class="mb-4 text-xl font-bold tracking-tight leading-tight underline">Need help with integrations?</h5>
+                <p class="text-sm font-light leading-tight">Click here if you need assistance with product integrations</p>
               </div>
             </a>
 
-            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-indigo-500 ring-1 ring-indigo-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-indigo-700 w-60">
+            <a target="_blank" href="#" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-indigo-600 ring-1 ring-indigo-700 rounded-lg shadow-zinc-950 shadow-lg hover:bg-indigo-800 w-60 text-white">
               <div>                
-                <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Looking for a report?</h5>
-                <p class="text-sm font-light leading-tight text-slate-200">Click here if you require assistance generating custom analytics data</p>
+                <h5 class="mb-4 text-xl font-bold tracking-tight leading-tight underline">Looking for a report?</h5>
+                <p class="text-sm font-light leading-tight">Click here if you require assistance generating custom analytics data</p>
               </div>
             </a>
           
-            <a target="_blank" href="https://forms.monday.com/forms/bcb5036610a533c452bb769c487a1c57?r=use1" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-orange-500 ring-1 ring-orange-400 rounded-lg shadow-zinc-950 shadow-lg hover:bg-orange-600 w-60">
+            <a target="_blank" href="https://forms.monday.com/forms/bcb5036610a533c452bb769c487a1c57?r=use1" class="flex items-start justify-center h-52 md:h-45 max-w-sm p-6 md:p-6 text-center bg-orange-500 ring-1 ring-orange-600 rounded-lg shadow-zinc-950 shadow-lg hover:bg-orange-600 w-60 text-white">
               <div>                
                 <h5 class="mb-4 text-xl font-bold tracking-tight text-white-200 leading-tight underline">Have a feature or idea request?</h5>
-                <p class="text-sm font-light leading-tight text-slate-200">Click here if the issue is a feature improvement, cosmetic enhancement, grammatical error or copy adjustment</p>
+                <p class="text-sm font-light leading-tight">Click here if the issue is a feature improvement, cosmetic enhancement, grammatical error or copy adjustment</p>
               </div>
             </a>
             
