@@ -99,13 +99,14 @@
 </script>
 
 <template>
-  <div class="h-full w-full md:w-1/2 md:ml-10 md:p-0 p-4 text-base relative">
-    <h3 class="mb-3 text-xl font-bold">Fill up these questions before proceeding</h3>
-    <form>
+  <div class="h-full w-full md:w-1/2 mb-8 p-6 text-base relative ring-1 ring-slate-800 rounded-xl bg-gray-900 shadow-2xl shadow-slate-950">
+    <h3 class="mb-5 text-xl font-light">Please fill the form before proceeding</h3>
+    <form class="text-sm">
       <label for="expectedBehavior">Issue Title <span class="text-red-600">*</span></label>
-      <input requried v-model="issueTitle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4" type="text" id="issueTitle" name="issueTitle" placeholder="What do you want to call this?">
+      <input requried v-model="issueTitle" class="bg-gray-700 border border-gray-600 text-gray-50 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1" type="text" id="issueTitle" name="issueTitle" placeholder="What do you want to call this?">
+     
       <label for="drProductID">Product associated with <span class="text-red-600">*</span></label>
-      <select id="drProductID" name="drProductID" v-model="product" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4">
+      <select id="drProductID" name="drProductID" v-model="product" class="bg-gray-700 border border-gray-600 text-gray-50 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1">
         <option value="-1" selected>Select the associated product below</option>
         <option value="0">myCadmium</option>
         <option value="1">Abstract Scorecard</option>
@@ -133,29 +134,34 @@
         <option value="23">Audio Recordings</option>        
       </select>      
       <label for="expectedBehavior">What is the expected behavior? <span class="text-red-600">*</span></label>
-      <input requried v-model="expectedBehavior" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4" type="text" id="expectedBehavior" name="expectedBehavior" placeholder="Describe the expected behavior here">
+      <input requried v-model="expectedBehavior" class="bg-gray-700 border border-gray-600 text-gray-50 placeholder:text-gray-400 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1" type="text" id="expectedBehavior" name="expectedBehavior" placeholder="Describe the expected behavior here">
+      
       <label for="actualBehavior">What is the actual behavior? <span class="text-red-600">*</span></label>
-      <input v-model="actualBehavior" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4" type="text" id="actualBehavior" name="actualBehavior" placeholder="Describe the actual behavior here">
+      <input v-model="actualBehavior" class="bg-gray-700 border border-gray-600 text-gray-50 placeholder:text-gray-400 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-1" type="text" id="actualBehavior" name="actualBehavior" placeholder="Describe the actual behavior here">
+      
       <label for="isolatedClient">Is this isolated to this client/event, or is this being experienced by all/most clients? (Please include additional event IDs if it is a subset of events) <span class="text-red-600">*</span></label>
       <br>
       <input v-model="isolatedClient" type="radio" name="isolatedClient" value="Yes"><label for="isolatedClient"> Yes</label>
       <input v-model="isolatedClient" type="radio" name="isolatedClient" value="No" class="ml-4"><label for="isolatedClient"> No</label>
-      <input v-model="isolatedClientText" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-2" type="text" id="isolatedClientText" name="isolatedClientText" placeholder="Add Event IDs here">
+      <input v-model="isolatedClientText" class="bg-gray-700 border border-gray-600 text-gray-50 placeholder:text-gray-400 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 mb-4 mt-2" type="text" id="isolatedClientText" name="isolatedClientText" placeholder="Add Event IDs here">
+      
       <label for="hasWorkaround">Is there a workaround? <span class="text-red-600">*</span></label>
       <br>
       <input v-model="hasWorkaround" type="radio" name="hasWorkaround" value="Yes"><label for="hasWorkaround"> Yes</label>
       <input v-model="hasWorkaround" type="radio" name="hasWorkaround" value="No" class="ml-4 mb-5"><label for="hasWorkaround"> No</label>
       <br>
+      
       <label for="errorDetails">Error message details, blue screen #</label>
-      <textarea v-model='errorDetails' class="text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 h-14" name="errorDetails" placeholder="Add details here"></textarea>      
+      <textarea v-model='errorDetails' class="bg-gray-700 border border-gray-600 text-gray-50 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 mt-1 h-12" name="errorDetails" placeholder="Add details here"></textarea>      
+      
       <label for="loginDetails">Login details (user information, SSO login/pass, app user QR code, etc.)</label>
-      <textarea v-model='loginDetails' class="text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 h-14" name="loginDetails" placeholder="Add details here"></textarea>            
+      <textarea v-model='loginDetails' class="bg-gray-700 border border-gray-600 text-gray-50  text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 mt-1 h-12" name="loginDetails" placeholder="Add details here"></textarea>            
+      
       <label for="urlDetails">URLs related to where the issue is occurring <span v-show="ifMobileApp" class="text-red-600">*</span></label>
-      <textarea v-model='urlDetails' class="text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 h-14" name="urlDetails" placeholder="Add details here"></textarea>      
+      <textarea v-model='urlDetails' class="bg-gray-700 border border-gray-600 text-gray-50 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mb-4 mt-1 h-12" name="urlDetails" placeholder="Add details here"></textarea>      
     </form>
-    <button :disabled="!fieldsNotEmpty" type="submit" @click="submitFormDetails()" class="disabled:opacity-25 font-bold mt-5 inline-block float-right rounded-full px-6 py-2 bg-orange-400 mb-8">Next</button>
-    <br><br>
-    
+    <button :disabled="!fieldsNotEmpty" type="submit" @click="submitFormDetails()" class="disabled:hidden font-bold mt-5 inline-block rounded-full px-6 py-2 bg-orange-400 hover:bg-orange-500">Next</button>
+        
   </div>
 </template>
 
@@ -166,7 +172,7 @@
     height: 22px;
     position: relative;
     top: 4px;
-    margin-right: 4px;    
+    margin-right: 4px;        
   }  
 
 </style>
