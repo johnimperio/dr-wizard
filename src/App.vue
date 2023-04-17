@@ -47,6 +47,7 @@
       startWizard() {
         this.wizardStarted = true
         this.wizard[0].showPage = true
+        this.message = 'Triage/Evaluations Questions'        
       },
 
       restartWizard() {        
@@ -69,8 +70,8 @@
         this.nextQuestion = false;
         this.showBack = false;
         this.currentPage = 1;
-        this.barColor = 'bg-gray-500';
-        this.message = 'What should I submit?';
+        this.barColor = 'bg-gray-500'
+        this.message = 'What should I submit?'
         
       },
 
@@ -182,6 +183,22 @@
 
       updateMessage() { 
         switch(this.currentPage) {
+          case 1:
+            this.barColor = 'bg-gray-500'; 
+            return this.message = 'Triage/Evaluations Questions'; 
+            break;
+          case 2:
+            this.barColor = 'bg-gray-500'; 
+            return this.message = 'Urgent Priority DR Questions'; 
+            break;
+          case 3:
+            this.barColor = 'bg-gray-500'; 
+            return this.message = 'High Priority DR Questions'; 
+            break;
+          case 4:
+            this.barColor = 'bg-gray-500'; 
+            return this.message = 'Low/Normal Priority DR Question'; 
+            break;  
           case 5: 
             this.barColor = 'bg-blue-500'; 
             return this.message = 'Non-Essential Issue'; 
@@ -214,9 +231,9 @@
   
   <div class="h-screen md:h-screen font-sans text-xl bg-gray-800 p-4 md:p-8 relative text-white font-light">
 
-    <div class="pb-4 mb-4">
-      <h1 class="text-xl sm:text-2xl md:text-3xl md:mt-0 font-semibold md:max-w-none w-1/2 sm:w-full md:w-full">{{ message }}</h1>
-      <div class="mt-3 h-1 w-full" :class="this.barColor" ></div>
+    <div class="pb-4 mb-2">
+      <h1 class="text-xl sm:text-2xl md:text-3xl md:mt-0 font-semibold md:max-w-none w-1/2 sm:w-full md:w-full">{{ message }}</h1>      
+      <div class="mt-3 h-1 w-full transition-all ease-in-out" :class="this.barColor" ></div>      
     </div>          
     
     <div class="flex justify-between">
@@ -263,9 +280,7 @@
         
         <!-- Page 1 - START TRIAGE/EVAL QUESTIONS -->
         <Transition name="slide-fade">
-          <div v-show="this.wizard[0].showPage"> <!-- if wizard has started -->
-            
-            <h2 class="md:text-3xl my-2 font-medium">Triage/Evaluations Questions</h2>
+          <div v-show="this.wizard[0].showPage"> <!-- if wizard has started -->           
 
             <ol class="ml-8 list-decimal">
               <li>
@@ -297,7 +312,6 @@
         <!-- Page 2 - URGENT PRIORITY DR QUESTIONS -->
         <Transition name="slide-fade">
           <div v-show="this.wizard[1].showPage">
-            <h2 class="md:text-3xl my-2 font-medium">Urgent Priority DR Questions</h2>
 
             <ol class="ml-8 list-decimal">
               <li>
@@ -328,7 +342,6 @@
         <!-- Page 3 - HIGH PRIORITY DR QUESTIONS -->
         <Transition name="slide-fade">
           <div v-show="this.wizard[2].showPage">
-            <h2 class="md:text-3xl my-2 font-medium">High Priority DR Questions</h2>
 
             <ol class="ml-8 list-decimal">
               <li>
@@ -359,7 +372,6 @@
         <!-- Page 4 - NORMAL PRIORITY DR QUESTIONS -->
         <Transition name="slide-fade">
           <div v-show="this.wizard[3].showPage">
-            <h2 class="md:text-3xl my-2 font-medium">Low/Normal Priority DR Question</h2>
 
             <ol class="ml-8 list-decimal">
               <li>
