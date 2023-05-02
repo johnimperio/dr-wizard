@@ -175,11 +175,7 @@
                 
         if (this.currentPage == 1) { this.showBack = false }
 
-      }
-
-    },
-
-    computed: {
+      },
 
       updateMessage() { 
         switch(this.currentPage) {
@@ -222,6 +218,7 @@
         } 
         
       }
+
     }
     
   }
