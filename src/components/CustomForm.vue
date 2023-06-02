@@ -55,24 +55,39 @@
 
       fieldsNotEmpty() {
  
-        // if Mobile app
+        // if Mobile app; also require URL details
         if ((this.product == 5)) {
           
           this.ifMobileApp = true
 
-          if ((this.issueTitle != '') && // require Issue Title              
-              (this.expectedBehavior != '') && // require Expected Behavior
-              (this.actualBehavior != '') && // require Actual Behavior
-              (this.isolatedClient != null) &&  // require Isolated Client (yes/no)
-              (this.isolatedClientText) &&  // require Isolated Client (additional info)
-              (this.hasWorkaround != null) && // require Has Workaround (yes/no)
-              (this.urlDetails != '')) // require URL details
-              {            
-                this.canSubmit = true
-                return true            
+          if ((this.isolatedClient == 'Yes')) {        
+            // also require Isolated Client Text
+            if ((this.issueTitle != '') && // require Issue Title              
+                (this.expectedBehavior != '') && // require Expected Behavior
+                (this.actualBehavior != '') && // require Actual Behavior                
+                (this.isolatedClientText) &&  // require Isolated Client (additional info)
+                (this.hasWorkaround != null) && // require Has Workaround (yes/no)
+                (this.urlDetails != '')) // require URL details
+                {            
+                  this.canSubmit = true
+                  return true            
+                }
           }
 
-        } else {
+          if ((this.isolatedClient == 'No')) {
+            // no need to require Isolated Client Text
+            if ((this.issueTitle != '') && // require Issue Title              
+                (this.expectedBehavior != '') && // require Expected Behavior
+                (this.actualBehavior != '') && // require Actual Behavior
+                (this.hasWorkaround != null) && // require Has Workaround (yes/no)
+                (this.urlDetails != '')) // require URL details
+                {            
+                  this.canSubmit = true
+                  return true            
+                }
+          }
+
+        } else { // no need to require URL details
 
           this.ifMobileApp = false
           
@@ -82,7 +97,8 @@
                 (this.expectedBehavior != '') && // require Expected Behavior
                 (this.actualBehavior != '') && // require Actual Behavior
                 (this.isolatedClientText) && // require isolated Client Text
-                (this.hasWorkaround != null)) {
+                (this.hasWorkaround != null)) // require has workaround
+                {
                   this.canSubmit = true
                   return true             
             }
@@ -93,7 +109,8 @@
             if ((this.issueTitle != '') && // require Issue Title              
                 (this.expectedBehavior != '') && // require Expected Behavior
                 (this.actualBehavior != '') && // require Actual Behavior                
-                (this.hasWorkaround != null)) {
+                (this.hasWorkaround != null))  // require has workaround
+                {
                   this.canSubmit = true
                   return true             
             }
