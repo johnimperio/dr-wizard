@@ -76,16 +76,27 @@
 
           this.ifMobileApp = false
           
-          // everything else
-          if ((this.issueTitle != '') && // require Issue Title              
-              (this.expectedBehavior != '') && // require Expected Behavior
-              (this.actualBehavior != '') && // require Actual Behavior
-              (this.isolatedClient != null) &&  // require Isolated Client (yes/no)
-              (this.isolatedClientText) &&  // require Isolated Client (additional info)
-              (this.hasWorkaround != null)) // require Has Workaround (yes/no)
-              {  
-                this.canSubmit = true
-                return true            
+          if ((this.isolatedClient == 'Yes')) {
+            // also require Isolated Client Text
+            if ((this.issueTitle != '') && // require Issue Title              
+                (this.expectedBehavior != '') && // require Expected Behavior
+                (this.actualBehavior != '') && // require Actual Behavior
+                (this.isolatedClientText) && // require isolated Client Text
+                (this.hasWorkaround != null)) {
+                  this.canSubmit = true
+                  return true             
+            }
+          }
+
+          if ((this.isolatedClient == 'No')) {
+            // do no require Isolated Client Text
+            if ((this.issueTitle != '') && // require Issue Title              
+                (this.expectedBehavior != '') && // require Expected Behavior
+                (this.actualBehavior != '') && // require Actual Behavior                
+                (this.hasWorkaround != null)) {
+                  this.canSubmit = true
+                  return true             
+            }
           }
 
         }
